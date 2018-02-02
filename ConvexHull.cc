@@ -102,3 +102,9 @@ vector<Point> makeConvexHullPresorted(const vector<Point> &points) {
 		upperHull.insert(upperHull.end(), lowerHull.cbegin(), lowerHull.cend());
 	return upperHull;
 }
+
+
+void Point::set(double x, double y){
+	this->x = x;
+	this->y = y;
+}

@@ -4,93 +4,91 @@
 #include <ctime>
 #include <iostream>
 #include <cassert>
+/** HELPER FUNCTIONS **/
 
-void vertex::set(int x, int y){
-  this->x = x;
-  this->y = y;
-  return;
+/*
+double distance(const Point &A,const Point B){
+	return sqrt(pow((A.x - B.x),2) + pow((A.y - B.y),2));
+}*/
+
+
+/** LINE CLASS **/
+line::line(double p1x, double p1y, double p2x, double p2y){
+	A.x = p1x;
+	A.y = p1y;
+	B.x = p2x;
+	B.y = p2y;
+}
+line::line(const Point &p1, const Point &p2){
+	A.x = p1.x;
+	A.y = p1.y;
+	B.x = p2.x;
+	B.y = p2.y;
+	std::cout<<"PointA:("<<A.x<<','<<A.y<<')';
+	std::cout<<"PointB:("<<B.x<<','<<B.y<<')';
+}
+double line::length(){
+	return sqrt(pow((A.x - B.x),2) + pow((A.y - B.y),2));
 }
 
+double line::slope(){
+	return (B.y - A.y) / (B.x - A.x);
+}
+
+double line::angle(){
+	double angle = atan(slope())*180/M_PI;
+	if(angle < 0)
+		return angle + 360;
+	return angle;
+}
+
+/** POLYGON CLASS **/
 polygon::polygon(int originX, int originY, int size){
-origin.set(originX, originY);
+	origin.x = originX;
+	origin.y = originY;
   this->size = size;
 }
 
 //equal will generate equalateral shapes, points will determine how many
 // vertecies the shape will have.
-void polygon::generatePoints(bool equal, int points){
+void polygon::generatePoints(bool regular, int points){
   assert(points >= 3);
   srand(time(0));
-  vertex tempVertex;
-//  float clockwise;
+	Point tempPoint;
 
-  //generate vertecies for number of points told
-  for(int counter = 0; counter < points; counter++){
+	//create number of points in hull
+	while(vertecies.size() < points){
 
-    std::cout<<"number of vertecies in this shape is: ";
-    std::cout<<vertecies.size()<<'\n';
-
-    int sizex = (rand() % size) - size/2;
-    int sizey = (rand() % size) - size/2;
-    // random within size
-    while((sizex - origin.x) == 0){  //prevent dividing by 0 later
-      sizex = (rand() % size) - size/2;
-    }
-
-
+		if(regular == true){
+    		double angle = vertecies.size() * 2 * M_PI / points;
+    		tempPoint.x = size * cos(angle);
+    		tempPoint.y = size * sin(angle);
+		}
+		else{
+		// random within size
+    	tempPoint.x = (rand() % size) - size/2;
+    	tempPoint.y = (rand() % size) - size/2;
+		}
     //align with origin
-    sizex += origin.x;
-    sizey += origin.y;
+    tempPoint.x += origin.x;
+    tempPoint.y += origin.y;
 
-    double rad;
-    rad = sqrt((pow(sizex,2))+(pow(sizey,2)));
-    std::cout<<rad;
+		vertecies.push_back(tempPoint);
 
-	   double Thta;
-	    Theta = atan(y/x);
-      std::cout<<theta;
-
-    std::cout<<sizex<<','<<sizey<<'\n';
-    //assign temp
-    tempVertex.set(sizex,sizey);
-
-    //if first point, plot the point.
-    if(counter == 0){
-      vertecies.push_back(tempVertex);
-    }
-
-    // calculate angles to make sure it generate in a clockwise motion
-    else{
-      double rad;
-      rad = sqrt((pow(x,2))+(pow(y,2)));
-      return rad;
-
-      double dy = vertecies.front().y - origin.y ;
-      double dx = vertecies[0].x - origin.x;
-      double m1 = dy/dx;
-      std::cout<<"slope:"<<m1<<'\n';
-       dy = tempVertex.y - origin.y ;
-       dx = tempVertex.x - origin.x;
-      double m2 = dy/dx;
-
-      std::cout<<"slope:"<<m2<<'\n';
-      double angle = atan(abs((m2 - m1)/ 1 + m2*m1));
-      angle = angle * 180 / 3.14159;
-      std::cout<<"ANGLE"<<angle<<'\n';
-
-      if(angle > 180){
-        counter -= 1;
-        std::cout<<"REJECTED";
-      }
-      else{
-        vertecies.push_back(tempVertex);
-      }
-    }
-
-  } // end counter loop
-
-  return;
+		if(vertecies.size() > 3){ //only makes sense to make a shape with 3 points
+			//create convex hull from given points
+			vertecies = makeConvexHull(vertecies);
+		}
+	}
+	display();
 }
-void polygon::generateHull(){
-  return;
+
+void polygon::display(){
+	for(int i = 0; i < vertecies.size(); i++){
+		std::cout<<'('<<vertecies[i].x;
+		std::cout<<','<<vertecies[i].y;
+		std::cout<<") ";
+	}
+	std::cout<<'\n';
+	return;
 }

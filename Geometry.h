@@ -1,5 +1,5 @@
 #ifndef Geometry_H
-#define Geometry_h
+#define Geometry_H
 
 #include <vector>
 #include "ConvexHull.h"
@@ -12,15 +12,30 @@ struct vertex{
   void set(int x, int y);
 };
 */
+//double distance(const Point &A, const Point& B);
+
+class line{
+public:
+	line(double p1x, double p1y, double p2x, double p2y);
+	line(const Point &p1, const Point &p2);
+	double length();
+	double slope();
+	double angle();
+	Point A, B;
+};
+
+
 class polygon{
 public:
 polygon(int originX, int originY, int size); //constructor creates origin of polygon
-void generatePoints(bool equal, int points); //will orginize points to their shapes
-void generateHull();
-std::vector<Point> vertecies;
+	void generatePoints(bool regular, int points); //will orginize points to their shapes
+	void generateHull();
+	void display();
+	std::vector<Point> vertecies;
 //private:
   int size;
-  //vertex origin; //center of the shape of which the points will be generated
+	Point origin; //origin will determine where the shape will be created
 };
+
 
 #endif //Geometry_H

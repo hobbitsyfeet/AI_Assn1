@@ -26,6 +26,7 @@
 
 struct Point final {
 
+	void set(double x, double y);
 	public: double x;
 	public: double y;
 

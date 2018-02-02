@@ -4,11 +4,19 @@ University of Lethbridge
 Name: Justin Petluk, ID# 001190085
 Date: January 31, 2018
 
-Using external and open resources along with personal code, this program
-generates a set of convex polygons and navigates from start to finish
-using only visible points along the way.
+Compile command:
+g++ main.cc ConvexHull.cc Geometry.cc -o ai_proj
 
-Classes and descriptions:
+then execute ai_proj.
+
+
+Description:
+Using external and open resources along with personal code, this program generates a set of convex polygons and navigates from start to finish using only visible points along the way.
+
+The polygons created are made from creating a convex hull from randomly generated points in a specified area. To generate regular shapes, set "regular" to true
+
+
+Classes:
 ConvexHull.cc / .h (Look at credits for source)
  - These are used to create convex polygons (specified in project).
 Geometry.cc / .h
