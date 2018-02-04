@@ -28,6 +28,7 @@ public:
 class polygon{
 public:
 polygon(int originX, int originY, int size); //constructor creates origin of polygon
+polygon(const Point &p1, int size);
 	void generatePoints(bool regular, int points); //will orginize points to their shapes
 	void generateHull();
 	void display();

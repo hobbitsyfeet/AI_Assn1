@@ -24,8 +24,6 @@ line::line(const Point &p1, const Point &p2){
 	A.y = p1.y;
 	B.x = p2.x;
 	B.y = p2.y;
-	std::cout<<"PointA:("<<A.x<<','<<A.y<<')';
-	std::cout<<"PointB:("<<B.x<<','<<B.y<<')';
 }
 double line::length(){
 	return sqrt(pow((A.x - B.x),2) + pow((A.y - B.y),2));
@@ -49,36 +47,45 @@ polygon::polygon(int originX, int originY, int size){
   this->size = size;
 }
 
+polygon::polygon(const Point &p1, int size){
+	origin.x = p1.x;
+	origin.y = p1.y;
+  this->size = size;
+}
+
+
 //equal will generate equalateral shapes, points will determine how many
 // vertecies the shape will have.
 void polygon::generatePoints(bool regular, int points){
   assert(points >= 3);
-  srand(time(0));
+  //srand(time(0));
 	Point tempPoint;
 
 	//create number of points in hull
 	while(vertecies.size() < points){
-
+		//std::cout<<vertecies.size()<<'\n';;
 		if(regular == true){
     		double angle = vertecies.size() * 2 * M_PI / points;
     		tempPoint.x = size * cos(angle);
     		tempPoint.y = size * sin(angle);
 		}
 		else{
-		// random within size
-    	tempPoint.x = (rand() % size) - size/2;
-    	tempPoint.y = (rand() % size) - size/2;
-		}
+			tempPoint.x = (rand() % size) - size/2;
+			tempPoint.y = (rand() % size) - size/2;
+		}//end else
+
     //align with origin
     tempPoint.x += origin.x;
     tempPoint.y += origin.y;
 
 		vertecies.push_back(tempPoint);
 
-		if(vertecies.size() > 3){ //only makes sense to make a shape with 3 points
-			//create convex hull from given points
-			vertecies = makeConvexHull(vertecies);
-		}
+
+
+	}
+	if(vertecies.size() > 3){ //only makes sense to make a shape with 3 points
+		//create convex hull from given points
+		vertecies = makeConvexHull(vertecies);
 	}
 	display();
 }
