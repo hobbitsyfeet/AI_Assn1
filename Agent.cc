@@ -5,5 +5,15 @@
 
   std::vector<Point> agent::actions(Point){
     std::vector<Point> accessablePoints;
+
+
     return accessablePoints;
   }
+
+
+void agent::searchBFS(){
+	return;
+}
+void agent::searchDFS(){
+	return;
+}

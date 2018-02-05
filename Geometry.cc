@@ -55,45 +55,61 @@ polygon::polygon(const Point &p1, int size){
 
 
 //equal will generate equalateral shapes, points will determine how many
-// vertecies the shape will have.
+// vertices the shape will have.
 void polygon::generatePoints(bool regular, int points){
   assert(points >= 3);
+	std::cout<<"Generating Points For New Polygon\n";
   //srand(time(0));
 	Point tempPoint;
 
 	//create number of points in hull
-	while(vertecies.size() < points){
-		//std::cout<<vertecies.size()<<'\n';;
+	while(vertices.size() < points){
+		//regular points
 		if(regular == true){
-    		double angle = vertecies.size() * 2 * M_PI / points;
+    		double angle = vertices.size() * 2 * M_PI / points;
     		tempPoint.x = size * cos(angle);
     		tempPoint.y = size * sin(angle);
-		}
+		}//end if regular
+
+		//initial point, no need to restrict
+		else if(vertices.size() == 0){
+			tempPoint.x = (rand() % size) - size/2;
+			tempPoint.y = (rand() % size) - size/2;
+		}//end else if vertecies empty
+
+		//prevents duplicate points
 		else{
 			tempPoint.x = (rand() % size) - size/2;
 			tempPoint.y = (rand() % size) - size/2;
-		}//end else
+			for(int i = 0; i < vertices.size(); i++){
+				bool equal_x = false;
+				bool equal_y = false;
+					while(equal_x == true && equal_y == true){
+						tempPoint.x = (rand() % size) - size/2;
+						tempPoint.y = (rand() % size) - size/2;
+					}
+				}
+			}//end else
 
     //align with origin
     tempPoint.x += origin.x;
     tempPoint.y += origin.y;
 
-		vertecies.push_back(tempPoint);
-
-
-
+		vertices.push_back(tempPoint);
 	}
-	if(vertecies.size() > 3){ //only makes sense to make a shape with 3 points
+	//only makes sense to make a shape with 3 points
+	if(vertices.size() > 3){
 		//create convex hull from given points
-		vertecies = makeConvexHull(vertecies);
+		vertices = makeConvexHull(vertices);
 	}
+	//display vertex results
 	display();
 }
 
 void polygon::display(){
-	for(int i = 0; i < vertecies.size(); i++){
-		std::cout<<'('<<vertecies[i].x;
-		std::cout<<','<<vertecies[i].y;
+	for(int i = 0; i < vertices.size(); i++){
+		std::cout<<'('<<vertices[i].x;
+		std::cout<<','<<vertices[i].y;
 		std::cout<<") ";
 	}
 	std::cout<<'\n';

@@ -32,7 +32,7 @@ polygon(const Point &p1, int size);
 	void generatePoints(bool regular, int points); //will orginize points to their shapes
 	void generateHull();
 	void display();
-	std::vector<Point> vertecies;
+	std::vector<Point> vertices;
 //private:
   int size;
 	Point origin; //origin will determine where the shape will be created

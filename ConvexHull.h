@@ -24,7 +24,7 @@
 #include <vector>
 
 
-struct Point final {
+struct Point {
 
 	void set(double x, double y);
 	public: double x;
