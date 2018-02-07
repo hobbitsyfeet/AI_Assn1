@@ -11,7 +11,7 @@ public:
   environment(int max_x, int max_y, int numberOfShapes);
   void reset(); //resets the map, agent allocation and history.
   void generateWolrd();
-  agent ProblemSlvr;
+  agent problemSolver;
   //public so agent can determine actions
   std::vector<polygon> shapes; //the list of shapes that exist
 

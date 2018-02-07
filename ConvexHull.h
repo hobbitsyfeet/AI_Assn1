@@ -22,6 +22,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 
 struct Point {
@@ -37,7 +38,9 @@ struct Point {
 	public: bool operator<=(const Point &other) const;
 	public: bool operator> (const Point &other) const;
 	public: bool operator>=(const Point &other) const;
+	public: Point& operator= (const Point &other );
 
+	std::string display();
 };
 
 

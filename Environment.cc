@@ -11,7 +11,7 @@
     envVolume.x = max_x;
     envVolume.y = max_y;
     numShapes = numberOfShapes;
-		//agent.environmentObsticals = &shapes;
+		problemSolver.environmentShapes = &shapes;
   }
 
 void environment::generateWolrd(){
@@ -40,32 +40,36 @@ std::cout<<"Generating Polygons\n";
 
     //prevent shapes from overlapping any polygon in list
     for(int i = 0; i < tempPolys.size(); i++){
-			std::cout<<"Distance Check: ";
+			//std::cout<<"Distance Check: ";
       line distanceCheck(tempPoint, tempPolys[i].origin);
-      std::cout<<distanceCheck.length()<<" To Polygon "<<i<<'\n';
+      //std::cout<<distanceCheck.length()<<" To Polygon "<<i<<'\n';
 
       if(distanceCheck.length() <= (shpSize + tempPolys[i].size + 1)){
         goodShape = false; //regenerate another shapeES
-        std::cout<<"REGENERATE ("<<i<<") Distance Required:";
-				std::cout<<shpSize + tempPolys[i].size + 2<<'\n';
+        //std::cout<<"REGENERATE ("<<i<<") Distance Required:";
+				//std::cout<<shpSize + tempPolys[i].size + 2<<'\n';
         break;
       }// end distance check
       else{goodShape = true;}
     }//end overlap check
   }//end polygon generation
 
-	bool regularRand = rand()%2;
-	std::cout<< regularRand<<"RegRandVal \n";
+	//bool regularRand = rand()%2;
+	bool regularRand = false;
+	//std::cout<< regularRand<<"RegRandVal \n";
   //create polygon with generated dimentions
   polygon readyPolygon(tempPoint,shpSize);
-  readyPolygon.generatePoints(regularRand, (rand() % 7) + 3 ); //random poly with 3-7 points
+  readyPolygon.generatePoints(regularRand, (rand() % 4) + 4 ); //random poly with 3-6 points
   tempPolys.push_back(readyPolygon);
-  std::cout<<"\n";
+  //std::cout<<"\n";
   }//end generatign polygon
 
   polygon startPoint(0,0,1);
   tempPoint.set(envVolume.x,envVolume.y);
   startPoint.vertices.push_back(tempPoint);
   tempPolys.push_back(startPoint); //push back final point in the env
+
+	//assign shapes
+	shapes = tempPolys;
   return;
 }

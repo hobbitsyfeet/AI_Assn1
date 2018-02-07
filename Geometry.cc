@@ -58,12 +58,13 @@ polygon::polygon(const Point &p1, int size){
 // vertices the shape will have.
 void polygon::generatePoints(bool regular, int points){
   assert(points >= 3);
-	std::cout<<"Generating Points For New Polygon\n";
+	//std::cout<<"Generating Points For New Polygon\n";
   //srand(time(0));
 	Point tempPoint;
 
+
 	//create number of points in hull
-	while(vertices.size() < points){
+	while(vertices.size() < points ){
 		//regular points
 		if(regular == true){
     		double angle = vertices.size() * 2 * M_PI / points;
@@ -101,6 +102,11 @@ void polygon::generatePoints(bool regular, int points){
 	if(vertices.size() > 3){
 		//create convex hull from given points
 		vertices = makeConvexHull(vertices);
+	}
+	//if the shape generated has only 2 points after hull
+	//just create a new shape.
+	if(vertices.size() < 3){
+		generatePoints(regular,points);
 	}
 	//display vertex results
 	display();

@@ -21,9 +21,18 @@
 
 #include <algorithm>
 #include "ConvexHull.h"
+#include <string>
 
 using std::vector;
 
+std::string Point::display(){
+	std::string tempString = "(";
+	tempString += this->x;
+	tempString +=",";
+	tempString += this->y;
+	tempString +=")";
+	return tempString;
+}
 
 bool Point::operator==(const Point &other) const {
 	return x == other.x && y == other.y;
@@ -52,6 +61,12 @@ bool Point::operator>=(const Point &other) const {
 	if (x != other.x) return x > other.x;
 	else return y >= other.y;
 }
+Point& Point::operator =(const Point& other ){
+	this->x = other.x;
+	this->y = other.y;
+	return *this;
+}
+
 
 
 vector<Point> makeConvexHull(const vector<Point> &points) {

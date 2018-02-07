@@ -16,8 +16,8 @@ struct vertex{
 
 class line{
 public:
-	line(double p1x, double p1y, double p2x, double p2y);
-	line(const Point &p1, const Point &p2);
+	line(double = 0 , double = 0, double = 0, double = 0);
+	line(const Point&p1, const Point&p2);
 	double length();
 	double slope();
 	double angle();
