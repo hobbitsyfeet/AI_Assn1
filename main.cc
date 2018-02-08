@@ -18,7 +18,7 @@ srand(1); //constant seed for debugging
 //100x100 map
 std::vector<Point> tempPoints;
 
-environment testEn(50,50,5);
+environment testEn(20,20,5);
 testEn.generateWolrd();
 
 //set our starting point to the first polygon's vertex.
