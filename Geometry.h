@@ -18,10 +18,12 @@ class line{
 public:
 	line(double = 0 , double = 0, double = 0, double = 0);
 	line(const Point&p1, const Point&p2);
+	void set(const Point&p1, const Point&p2);
+	void display();
 	double length();
 	double slope();
 	double angle();
-	Point A, B;
+	Point p1, p2;
 };
 
 

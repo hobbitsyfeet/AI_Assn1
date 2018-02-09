@@ -33,7 +33,7 @@ std::cout<<"Generating Polygons\n";
     goodShape = false;
     while(!goodShape){
     //generate x,y origin for the current shape (+ 10 x, y so no negs generate.)
-    tempPoint.set(rand()% int(envVolume.x) + 10, rand()% int(envVolume.y) + 10 );
+    tempPoint.set(rand()% int(envVolume.x) + 10, rand()% int(envVolume.y) + 5 );
 
     //size of shape
   shpSize = (rand()% 7)+3 ; //size of a shape is randomly between 3-10
@@ -44,7 +44,7 @@ std::cout<<"Generating Polygons\n";
       line distanceCheck(tempPoint, tempPolys[i].origin);
       //std::cout<<distanceCheck.length()<<" To Polygon "<<i<<'\n';
 
-      if(distanceCheck.length() <= (shpSize + tempPolys[i].size + 1)){
+      if(distanceCheck.length() <= (shpSize + tempPolys[i].size )){
         goodShape = false; //regenerate another shapeES
         //std::cout<<"REGENERATE ("<<i<<") Distance Required:";
 				//std::cout<<shpSize + tempPolys[i].size + 2<<'\n';

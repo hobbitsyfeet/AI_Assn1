@@ -21,17 +21,12 @@
 
 #include <algorithm>
 #include "ConvexHull.h"
-#include <string>
+#include <iostream>
 
 using std::vector;
 
-std::string Point::display(){
-	std::string tempString = "(";
-	tempString += this->x;
-	tempString +=",";
-	tempString += this->y;
-	tempString +=")";
-	return tempString;
+void Point::display(){
+	std::cout<<"("<<x<<","<<y<<")";
 }
 
 bool Point::operator==(const Point &other) const {

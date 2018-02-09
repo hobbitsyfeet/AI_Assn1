@@ -2,7 +2,7 @@ CCC= g++
 
 all : ai_proj
 ai_proj : main.o ConvexHull.o Agent.o Environment.o Geometry.o
-	$(CCC) -Wc++11- $^ -o $@ 
+	$(CCC) $^ -o $@ 
 
 # $< = the corresponding .cc file
 %.o : %.cc

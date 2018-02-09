@@ -7,40 +7,47 @@
 /** HELPER FUNCTIONS **/
 
 /*
-double distance(const Point &A,const Point B){
-	return sqrt(pow((A.x - B.x),2) + pow((A.y - B.y),2));
+double distance(const Point &p1,const Point p2){
+	return sqrt(pow((p1.x - p2.x),2) + pow((p1.y - p2.y),2));
 }*/
 
 
-/** LINE CLASS **/
+/** LINE CLp1SS **/
 line::line(double p1x, double p1y, double p2x, double p2y){
-	A.x = p1x;
-	A.y = p1y;
-	B.x = p2x;
-	B.y = p2y;
+	this->p1.x = p1x;
+	this->p1.y = p1y;
+	this->p2.x = p2x;
+	this->p2.y = p2y;
 }
 line::line(const Point &p1, const Point &p2){
-	A.x = p1.x;
-	A.y = p1.y;
-	B.x = p2.x;
-	B.y = p2.y;
+	this->p1.x = p1.x;
+	this->p1.y = p1.y;
+	this->p2.x = p2.x;
+	this->p2.y = p2.y;
 }
+void line::set(const Point &p1, const Point &p2){
+	this->p1.x = p1.x;
+	this->p1.y = p1.y;
+	this->p2.x = p2.x;
+	this->p2.y = p2.y;
+}
+void line::display(){
+	std::cout<<p1.x<<','<<p1.y<<"--->"<<p2.x<<','<<p2.y;
+}
+
 double line::length(){
-	return sqrt(pow((A.x - B.x),2) + pow((A.y - B.y),2));
+	return sqrt(pow((p1.x - p2.x),2) + pow((p1.y - p2.y),2));
 }
 
 double line::slope(){
-	return (B.y - A.y) / (B.x - A.x);
+return (p2.y - p1.y) / (double)(p2.x - p1.x);
 }
 
 double line::angle(){
-	double angle = atan(slope())*180/M_PI;
-	if(angle < 0)
-		return angle + 360;
-	return angle;
+return atan2(p1.y - p2.y, p1.x - p2.x)*180/M_PI;
 }
 
-/** POLYGON CLASS **/
+/** POLYGON CLp1SS **/
 polygon::polygon(int originX, int originY, int size){
 	origin.x = originX;
 	origin.y = originY;

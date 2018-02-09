@@ -18,18 +18,21 @@ srand(1); //constant seed for debugging
 //100x100 map
 std::vector<Point> tempPoints;
 
-environment testEn(20,20,5);
+environment testEn(25,25,9);
 testEn.generateWolrd();
 
 //set our starting point to the first polygon's vertex.
 //this polygon is specialy designated to be (0,0).
-testEn.problemSolver.currentPoint = &testEn.shapes[0].vertices[0];
+testEn.problemSolver.currentPoint = &testEn.shapes[2].vertices[2];
 
 //init pass first point in.
 tempPoints = testEn.problemSolver.actions(testEn.problemSolver.currentPoint);
 
 for (int i = 0; i < tempPoints.size(); i++){
-	std::cout<<tempPoints[i].display();
+	tempPoints[i].display();
 }
+//line test(12,18, 13,12);
+//test.display();
+//std::cout<<" "<<test.angle();
   return 0;
 }
