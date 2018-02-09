@@ -62,14 +62,14 @@
                 //length determines if it's behind.
                 bool testlength = (round(testLine.length()) < round(tempLine1.length()) && (round(testLine.length()) < round(tempLine2.length())));
                 //bool samePoint = (tempLine1.p1.x == testLine.p2.x);
-                if(!testlength)
+              //  if(!testlength)
                   //std::cout<<"!!";
                //std::cout<<'['<<tempLine1.length()<<'|'<<testLine.length()<<'|'<<tempLine2.length()<<"]\n";
 
                 //if the testangle exists between the two lines, reject it
                 //if((testAngle && !testlength && !samePoint) || (testAngle2 && !testlength && !samePoint)){
-                if((testAngle) || (testAngle2)){
-                  std::cout<<"adding<"<<testLine.angle()<<">";
+                if((testAngle && !testlength ) || (testAngle2 && !testlength)){
+                  std::cout<<"rejecting <"<<testLine.angle()<<">";
                   testLine.p2.display();
                   std::cout<<'\n';
                   //reject the point on the 2nd coord of the line
@@ -86,7 +86,6 @@
                 }
               }//end numVertex2
             }//end numshapes2
-      //  testLines.push_back(tempLine);
 			}//end of polygon's vertices
 		}//end tempPolys
 
@@ -109,14 +108,17 @@
 
       }//end vertex
     }//end shape
-		//now we have lines,
     return accessablePoints;
   }
 
+void agent::AStar(){
+
+}
 
 void agent::searchBFS(){
 	return;
 }
+
 void agent::searchDFS(){
 	return;
 }
